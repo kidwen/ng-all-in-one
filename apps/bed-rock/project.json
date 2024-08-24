@@ -2,13 +2,13 @@
     "name": "bed-rock",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "application",
+    "sourceRoot": "apps/bed-rock/src",
+    "prefix": "app",
     "generators": {
         "@schematics/angular:component": {
             "style": "scss"
         }
     },
-    "sourceRoot": "apps/bed-rock/src",
-    "prefix": "app",
     "targets": {
         "build": {
             "executor": "@angular-devkit/build-angular:application",
@@ -16,9 +16,7 @@
                 "outputPath": "dist/apps/bed-rock",
                 "index": "apps/bed-rock/src/index.html",
                 "browser": "apps/bed-rock/src/main.ts",
-                "polyfills": [
-                    "zone.js"
-                ],
+                "polyfills": ["zone.js"],
                 "tsConfig": "apps/bed-rock/tsconfig.app.json",
                 "inlineStyleLanguage": "scss",
                 "assets": [
@@ -27,9 +25,7 @@
                         "input": "apps/bed-rock/public"
                     }
                 ],
-                "styles": [
-                    "apps/bed-rock/src/styles.scss"
-                ],
+                "styles": ["apps/bed-rock/src/styles.scss"],
                 "scripts": []
             },
             "configurations": {
@@ -74,10 +70,7 @@
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {
-                "polyfills": [
-                    "zone.js",
-                    "zone.js/testing"
-                ],
+                "polyfills": ["zone.js", "zone.js/testing"],
                 "tsConfig": "apps/bed-rock/tsconfig.spec.json",
                 "inlineStyleLanguage": "scss",
                 "assets": [
@@ -86,10 +79,57 @@
                         "input": "apps/bed-rock/public"
                     }
                 ],
-                "styles": [
-                    "apps/bed-rock/src/styles.scss"
-                ],
+                "styles": ["apps/bed-rock/src/styles.scss"],
                 "scripts": []
+            }
+        },
+        "storybook": {
+            "executor": "@storybook/angular:start-storybook",
+            "options": {
+                "port": 4400,
+                "configDir": "apps/bed-rock/.storybook",
+                "browserTarget": "bed-rock:build",
+                "compodoc": false
+            },
+            "configurations": {
+                "ci": {
+                    "quiet": true
+                }
+            }
+        },
+        "build-storybook": {
+            "executor": "@storybook/angular:build-storybook",
+            "outputs": ["{options.outputDir}"],
+            "options": {
+                "outputDir": "dist/storybook/bed-rock",
+                "configDir": "apps/bed-rock/.storybook",
+                "browserTarget": "bed-rock:build",
+                "compodoc": false
+            },
+            "configurations": {
+                "ci": {
+                    "quiet": true
+                }
+            }
+        },
+        "test-storybook": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "test-storybook -c apps/bed-rock/.storybook --url=http://localhost:4400"
+            }
+        },
+        "static-storybook": {
+            "executor": "@nx/web:file-server",
+            "dependsOn": ["build-storybook"],
+            "options": {
+                "buildTarget": "bed-rock:build-storybook",
+                "staticFilePath": "dist/storybook/bed-rock",
+                "spa": true
+            },
+            "configurations": {
+                "ci": {
+                    "buildTarget": "bed-rock:build-storybook:ci"
+                }
             }
         }
     }
