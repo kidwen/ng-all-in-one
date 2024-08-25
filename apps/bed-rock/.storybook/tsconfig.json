@@ -2,7 +2,7 @@
     "extends": "../tsconfig.json",
     "compilerOptions": {
         "emitDecoratorMetadata": true,
-        "declaration": true
+        "resolveJsonModule": true
     },
     "exclude": ["../**/*.spec.ts"],
     "include": [

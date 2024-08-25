@@ -4,10 +4,12 @@
     "scripts": {
         "ng": "ng",
         "start": "nx serve bed-rock --hmr",
-        "start:bed-rock": "nx run bed-rock:storybook",
+        "start:storybook": "nx run bed-rock:storybook",
         "build": "nx build bed-rock",
+        "build:storybook": "nx run bed-rock:build-storybook",
         "watch": "nx build bed-rock --watch --configuration development",
         "test": "nx test bed-rock",
+        "test:storybook": "nx run bed-rock:test-storybook",
         "graph": "nx graph "
     },
     "private": true,
@@ -32,6 +34,7 @@
         "@angular-devkit/schematics": "^18.2.1",
         "@angular/cli": "^18.2.1",
         "@angular/compiler-cli": "^18.2.0",
+        "@compodoc/compodoc": "^1.1.25",
         "@nx/angular": "19.6.2",
         "@nx/js": "19.6.2",
         "@nx/storybook": "^19.6.2",
