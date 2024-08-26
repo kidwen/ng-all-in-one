@@ -1,0 +1,69 @@
+{
+    "name": "@kidwen/bed-rock",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/bed-rock/src",
+    "prefix": "lib",
+    "projectType": "library",
+    "tags": [],
+    "targets": {
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/bed-rock/jest.config.ts"
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint"
+        },
+        "storybook": {
+            "executor": "@storybook/angular:start-storybook",
+            "options": {
+                "port": 4400,
+                "configDir": "libs/bed-rock/.storybook",
+                "browserTarget": "@kidwen/bed-rock:build-storybook",
+                "compodoc": false
+            },
+            "configurations": {
+                "ci": {
+                    "quiet": true
+                }
+            }
+        },
+        "build-storybook": {
+            "executor": "@storybook/angular:build-storybook",
+            "outputs": ["{options.outputDir}"],
+            "options": {
+                "outputDir": "dist/storybook/bed-rock",
+                "configDir": "libs/bed-rock/.storybook",
+                "browserTarget": "@kidwen/bed-rock:build-storybook",
+                "compodoc": false
+            },
+            "configurations": {
+                "ci": {
+                    "quiet": true
+                }
+            }
+        },
+        "test-storybook": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "test-storybook -c libs/bed-rock/.storybook --url=http://localhost:4400"
+            }
+        },
+        "static-storybook": {
+            "executor": "@nx/web:file-server",
+            "dependsOn": ["build-storybook"],
+            "options": {
+                "buildTarget": "@kidwen/bed-rock:build-storybook",
+                "staticFilePath": "dist/storybook/bed-rock",
+                "spa": true
+            },
+            "configurations": {
+                "ci": {
+                    "buildTarget": "@kidwen/bed-rock:build-storybook:ci"
+                }
+            }
+        }
+    }
+}
