@@ -1,0 +1,5 @@
+<button [disabled]="disabled">
+    <ng-content select="[before]"></ng-content>
+    <ng-content>{{ text }}</ng-content>
+    <ng-content select="[after]"></ng-content>
+</button>

@@ -1,0 +1,28 @@
+:host(kid-button) {
+    --gap: 8px;
+    --padding: 8px;
+    --border-radius: 8px;
+    --bg-color: #aaaaff;
+    --primary-color: #333;
+    --second-color: #fff;
+
+    button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--gap);
+
+        border: 1px solid var(--bg-color);
+        border-radius: var(--border-radius);
+        padding: var(--padding);
+        background-color: var(--second-color);
+
+        user-select: none;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--bg-color);
+            color: var(--second-color);
+        }
+    }
+}

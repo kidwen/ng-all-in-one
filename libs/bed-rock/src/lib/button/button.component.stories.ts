@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { BedRockComponent } from './bed-rock.component';
+import { ButtonComponent } from './button.component';
 
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 
-const meta: Meta<BedRockComponent> = {
-    component: BedRockComponent,
+const meta: Meta<ButtonComponent> = {
+    component: ButtonComponent,
     title: 'BedRockComponent',
 };
 export default meta;
-type Story = StoryObj<BedRockComponent>;
+type Story = StoryObj<ButtonComponent>;
 
 export const Primary: Story = {
     args: {},

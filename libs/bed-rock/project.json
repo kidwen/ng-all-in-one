@@ -2,7 +2,7 @@
     "name": "@kidwen/bed-rock",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/bed-rock/src",
-    "prefix": "lib",
+    "prefix": "kid",
     "projectType": "library",
     "tags": [],
     "targets": {

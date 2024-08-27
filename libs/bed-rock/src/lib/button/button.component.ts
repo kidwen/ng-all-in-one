@@ -3,15 +3,18 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'lib-bed-rock',
+    selector: 'kid-button',
     standalone: true,
     imports: [CommonModule],
-    templateUrl: './bed-rock.component.html',
-    styleUrl: './bed-rock.component.scss',
+    templateUrl: './button.component.html',
+    styleUrl: './button.component.scss',
 })
-export class BedRockComponent {
+export class ButtonComponent {
     @Input()
     public text = '';
+
+    @Input()
+    public disabled = false;
 
     @Output()
     public onClick = new EventEmitter<void>();
